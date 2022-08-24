@@ -171,8 +171,6 @@
                         android:inputType="numberDecimal"
                         android:maxLength="4"
                         android:text="7.1"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
                         android:textColor="@color/md_black_1000"
                         android:textSize="60sp"
                         android:textStyle="bold"

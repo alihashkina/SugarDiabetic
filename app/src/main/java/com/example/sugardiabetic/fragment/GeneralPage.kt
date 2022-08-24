@@ -4,16 +4,18 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ContentValues
 import android.os.Build
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.DatePicker
+import android.widget.TextView.OnEditorActionListener
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.sugardiabetic.R
 import com.example.sugardiabetic.databinding.FragmentGeneralPageBinding
 import com.example.sugardiabetic.db.MyDBHelper
@@ -23,6 +25,7 @@ import com.example.sugardiabetic.viewModel.GeneralPageViewModel.Companion.hour
 import com.example.sugardiabetic.viewModel.GeneralPageViewModel.Companion.minute
 import com.example.sugardiabetic.viewModel.GeneralPageViewModel.Companion.month
 import com.example.sugardiabetic.viewModel.GeneralPageViewModel.Companion.year
+
 
 class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -60,6 +63,15 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
         viewModel = ViewModelProvider(this).get(GeneralPageViewModel::class.java)
         bindingGeneralPage.txtSugar.setSelection(bindingGeneralPage.txtSugar.length())
         editSugar = bindingGeneralPage.txtSugar.text.toString()
+
+        bindingGeneralPage.txtSugar.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            var handled = false
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                bindingGeneralPage.btnSave.callOnClick()
+               handled = true
+            }
+            handled
+        })
 
         bindingGeneralPage.btnPlus.setOnClickListener {
             if(bindingGeneralPage.txtSugar.text.toString().toDouble() < 30.0) {
@@ -128,4 +140,5 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
         saveminute = minute
         bindingGeneralPage.txtRecord.text = "Record $saveday.${savemonth + 1}.$saveyear $savehour:$saveminute"
     }
+
 }
