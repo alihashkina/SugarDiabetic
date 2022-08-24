@@ -33,6 +33,7 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
         var dateDB = ""
         var arrayDateGraph : MutableList<String> = mutableListOf()
         var arraySugarGraph : MutableList<Int> = mutableListOf()
+        lateinit var bindingGeneralPage: FragmentGeneralPageBinding
     }
 
     var saveyear = 0
@@ -40,7 +41,7 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
     var saveday = 0
     var savehour = 0
     var saveminute = 0
-    lateinit var bindingGeneralPage: FragmentGeneralPageBinding
+
 
     private lateinit var viewModel: GeneralPageViewModel
 
@@ -85,7 +86,7 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
             }
         }
 
-        viewModel.graph(bindingGeneralPage.graph, context!!)
+        viewModel.graph(bindingGeneralPage.graph, requireContext())
 
         bindingGeneralPage.btnSave.setOnClickListener {
             viewModel.chipsCheck(bindingGeneralPage.chip1, bindingGeneralPage.chip2, bindingGeneralPage.chip3, bindingGeneralPage.chip4, bindingGeneralPage.chip5)
@@ -94,9 +95,9 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
             cv.put("DATE", "${bindingGeneralPage.txtRecord.text.drop(7)}")
             cv.put("SUGAR", bindingGeneralPage.txtSugar.text.toString())
             cv.put("CHIPS", "${chipsCheckTxt}")
-            MyDBHelper(context!!).readableDatabase.insert("USERS", null, cv)
+            MyDBHelper(requireContext()).readableDatabase.insert("USERS", null, cv)
             chipsCheckTxt = ""
-            viewModel.graph(bindingGeneralPage.graph, context!!)
+            viewModel.graph(bindingGeneralPage.graph, requireContext())
         }
 
         if(bindingGeneralPage.txtRecord.text == ""){
@@ -110,7 +111,7 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
     private fun pickDate(){
         bindingGeneralPage.txtRecord.setOnClickListener{
             viewModel.getDateTimeCalendar(bindingGeneralPage.txtRecord)
-            DatePickerDialog(context!!, this, year, month, day).show()
+            DatePickerDialog(requireContext(), this, year, month, day).show()
         }
     }
 
@@ -119,7 +120,7 @@ class GeneralPage : Fragment(), DatePickerDialog.OnDateSetListener, TimePickerDi
         savemonth = month
         saveyear = year
         viewModel.getDateTimeCalendar(bindingGeneralPage.txtRecord)
-        TimePickerDialog(context!!, this, hour, minute, false).show()
+        TimePickerDialog(requireContext(), this, hour, minute, false).show()
     }
 
     override fun onTimeSet(view: TimePicker?, hour: Int, minute: Int) {

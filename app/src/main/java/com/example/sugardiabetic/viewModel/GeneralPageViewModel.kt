@@ -1,6 +1,20 @@
 package com.example.sugardiabetic.viewModel
 
+import android.content.Context
+import android.widget.TextView
 import androidx.lifecycle.ViewModel
+import com.example.sugardiabetic.R
+import com.example.sugardiabetic.db.MyDBHelper
+import com.example.sugardiabetic.fragment.GeneralPage
+import com.example.sugardiabetic.fragment.GeneralPage.Companion.arrayDateGraph
+import com.example.sugardiabetic.fragment.GeneralPage.Companion.arraySugarGraph
+import com.example.sugardiabetic.fragment.GeneralPage.Companion.chipsCheckTxt
+import com.example.sugardiabetic.fragment.GeneralPage.Companion.dateDB
+import com.google.android.material.chip.Chip
+import im.dacer.androidcharts.LineView
+import java.math.RoundingMode
+import java.util.*
+import kotlin.collections.ArrayList
 
 class GeneralPageViewModel : ViewModel() {
 
