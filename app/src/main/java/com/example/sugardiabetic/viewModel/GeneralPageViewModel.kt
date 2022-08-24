@@ -1,6 +1,7 @@
 package com.example.sugardiabetic.viewModel
 
 import android.content.Context
+import android.util.Log
 import android.widget.TextView
 import androidx.lifecycle.ViewModel
 import com.example.sugardiabetic.R
