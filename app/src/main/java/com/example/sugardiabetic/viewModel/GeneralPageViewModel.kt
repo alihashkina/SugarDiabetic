@@ -90,6 +90,8 @@ class GeneralPageViewModel : ViewModel() {
         }
 
         if(dateDB != "") {
+            arraySugarGraph.reverse()
+            arrayDateGraph.reverse()
             var dataLists = ArrayList<ArrayList<Int>>()
             dataLists = arrayListOf(arraySugarGraph as ArrayList<Int>)
             graph.setDrawDotLine(false) //optional
