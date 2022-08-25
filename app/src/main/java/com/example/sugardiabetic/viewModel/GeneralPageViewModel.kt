@@ -96,7 +96,7 @@ class GeneralPageViewModel : ViewModel() {
             dataLists = arrayListOf(arraySugarGraph as ArrayList<Int>)
             graph.setDrawDotLine(false) //optional
             graph.getResources().getColor(R.color.md_white_1000)
-            graph.setShowPopup(LineView.SHOW_POPUPS_NONE) //optional
+            graph.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY) //optional
             graph.setBottomTextList(arrayDateGraph as ArrayList<String>?)
             graph.setColorArray(intArrayOf(R.color.md_black_1000))
             graph.setDataList(dataLists)
